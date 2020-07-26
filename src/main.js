@@ -1,11 +1,11 @@
 import App from './App.svelte';
-import tileset from './data'
+import loadData from './repo.js'
 
-const app = new App({
-	target: document.getElementById('jw-tiles'),
-	props: {
-		tileset
-	}
-});
-
-export default app;
+loadData(function(tileset){
+	const app = new App({
+		target: document.getElementById('jw-tiles'),
+		props: {
+			tileset
+		}
+	});
+})

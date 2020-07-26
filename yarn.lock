@@ -79,6 +79,11 @@
   dependencies:
     "@types/node" "*"
 
+"@typicode/pegasus@^0.3.5":
+  version "0.3.5"
+  resolved "https://registry.yarnpkg.com/@typicode/pegasus/-/pegasus-0.3.5.tgz#a04bbb2f0d6ec949cde808842ccb3ed6b19d0127"
+  integrity sha1-oEu7Lw1uyUnN6AiELMs+1rGdASc=
+
 acorn@^7.1.0:
   version "7.1.1"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-7.1.1.tgz#e35668de0b402f359de515c5482a1ab9f89a69bf"
