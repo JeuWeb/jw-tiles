@@ -4,8 +4,6 @@ import commonjs from "@rollup/plugin-commonjs"
 import livereload from "rollup-plugin-livereload"
 import { terser } from "rollup-plugin-terser"
 
-const production = !process.env.ROLLUP_WATCH
-
 function createConfig(production, buildPath) {
   return {
     input: "src/main.js",
@@ -55,10 +53,16 @@ function createConfig(production, buildPath) {
   }
 }
 
-export default [
-  createConfig(production, "public/build/bundle.js"),
-  createConfig(true, "jw-tiles.min.js"),
-]
+const production = !process.env.ROLLUP_WATCH
+
+const configs = production
+  ? createConfig(true, "jw-tiles.min.js")
+  : [
+      createConfig(false, "public/build/bundle.js"),
+      createConfig(true, "jw-tiles.min.js"),
+    ]
+
+export default configs
 
 function serve() {
   let started = false
