@@ -5,15 +5,17 @@
 	export let tileset
 	let shuffled = tileset.slice()
 	shuffle(shuffled)
-	$: selectedTiles = shuffled.slice(0, 4)
+	
 	function goLeft() {
 		shuffled = [shuffled[shuffled.length - 1]].concat(shuffled.slice(0, shuffled.length - 1))
-		console.log(`shuffled[0]`, shuffled[0])
 	}
 	function goRight() {
 		shuffled = shuffled.slice(1).concat([shuffled[0]])
-		console.log(`shuffled[0]`, shuffled[0])
 	}
+
+	$: selectedTiles = shuffled.slice(0, 4)
+	$: preload_next = shuffled[4]
+	$: preload_before = shuffled[shuffled.length-1]
 </script>
 
 <div class="jw-tiles-inner">
@@ -28,6 +30,8 @@
 	<div class="jw-tiles-arrow jw-tiles-arrow-left" on:click={goLeft}><span>◀</span></div>
 	<div class="jw-tiles-arrow jw-tiles-arrow-right" on:click={goRight}><span>▶</span></div>
 </div>
+{#if preload_next}<img class="jw-tiles-hidden" src="{preload_next.image}" alt="preloading" />{/if}
+{#if preload_before}<img class="jw-tiles-hidden" src="{preload_before.image}" alt="preloading" />{/if}
 
 <style>
 	.jw-tiles-inner {
@@ -90,5 +94,6 @@
 	.jw-tiles-tile:first-child img { border-radius: 8px 0 0 0; }
 	.jw-tiles-tile:last-child > div { border-radius: 0 0 8px 0; }
 	.jw-tiles-tile:last-child img { border-radius: 0 8px 0 0; }
-    
+	
+	.jw-tiles-hidden { display: none; }
 </style>
