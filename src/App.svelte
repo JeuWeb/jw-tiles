@@ -1,15 +1,19 @@
 <script>
-  import { shuffle, keyUpdate } from './utils'
+  import { shuffle } from './utils'
   const srcOnError = '//jeuweb.org/jscripts/jeuweb/no-game-image.png'
   export let tileset = []
   let shuffled = tileset.slice()
   shuffle(shuffled)
 
   function goLeft() {
-    shuffled = [shuffled[shuffled.length - 1]].concat(shuffled.slice(0, shuffled.length - 1))
+    shuffled.splice(0, 0, shuffled.pop())
+    shuffled = shuffled
+    console.log(`shuffled.length`, shuffled.length)
   }
   function goRight() {
-    shuffled = shuffled.slice(1).concat([shuffled[0]])
+    shuffled.push(shuffled.shift())
+    shuffled = shuffled
+    console.log(`shuffled.length`, shuffled.length)
   }
 
   $: selectedTiles = shuffled.slice(0, 4)
@@ -18,22 +22,25 @@
 
   function handleImageError(error, tile) {
     if (tile.image !== srcOnError) {
-      shuffled = keyUpdate(shuffled, 'image', tile.image, tile => ({ ...tile, image: srcOnError, fit: 'contain' }))
+      tile.fit = 'contain'
+      tile.image = srcOnError
+      shuffled = shuffled
     }
   }
 </script>
 
-<svelte:options immutable={true} />
 <div class="jw-tiles-inner">
   <div class="jw-tiles-tileset">
     {#each selectedTiles as tile (tile.id)}
       <a class="jw-tiles-tile" href={tile.url}>
-        <img
-          src={tile.image}
-          alt={tile.name}
-          on:error={error => handleImageError(error, tile)}
-          style="object-fit: {tile.fit}" />
-        <div>{tile.name}</div>
+        <div class="jw-tiles-ratio">
+          <img
+            src={tile.image}
+            alt={tile.name}
+            on:error={error => handleImageError(error, tile)}
+            style="object-fit: {tile.fit}" />
+          <div class="jw-tiles-game-title">{tile.name}</div>
+        </div>
       </a>
     {/each}
   </div>
@@ -60,23 +67,33 @@
       sans-serif;
   }
   .jw-tiles-tileset {
-    height: 13em;
     display: flex;
     justify-content: space-between;
     align-items: stretch;
-  }
-  img {
-    display: block;
-    width: 100%;
-    height: calc(100% - 30px);
   }
   .jw-tiles-tile {
     width: calc(25% - 9px);
     text-decoration: none;
     background: rgb(209, 209, 209);
   }
-  .jw-tiles-tile div {
-    height: 30px;
+  .jw-tiles-ratio {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: calc(62.5% + 30px);
+  }
+  img {
+    position: absolute;
+    display: block;
+    height: calc(100% - 30px);
+    width: 100%;
+    height: calc(100% - 30px);
+  }
+  .jw-tiles-game-title {
+    position: absolute;
+    bottom: 0;
+    /* overlap 1px */
+    height: 31px;
     background: #2c2c2c;
     color: #fff;
     padding: 0 8px;

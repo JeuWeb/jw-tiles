@@ -17,14 +17,3 @@ export function shuffle(array) {
 
   return array
 }
-
-export function keyUpdate(list, propName, propVal, fn) {
-  let i
-  for (i = 0; i < list.length; i++) {
-    const item = list[i]
-    if (item[propName] === propVal) {
-      return [...list.slice(0, i), fn(item), ...list.slice(i + 1)]
-    }
-  }
-  return list
-}
