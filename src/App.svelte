@@ -42,10 +42,14 @@
 	.jw-tiles-tileset {
 		display: flex;
 		justify-content: space-between;
+		align-items: end;
+		height: 18em;
 	}
 	img {
 		display: block;
 		width: 100%;
+		max-height: 13em;
+		object-fit: cover;
 	}
 	.jw-tiles-tile {
 		width: calc(25% - 9px);
