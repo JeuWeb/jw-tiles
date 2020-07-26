@@ -1,6 +1,6 @@
 import fetch from '@typicode/pegasus'
 
-const url = '//www.jeuweb.org/our-games.json'
+const url = '//jeuweb.org/our-games.json'
 
 function shrinkGame(game) {
   const { name, url, image, description, id } = game

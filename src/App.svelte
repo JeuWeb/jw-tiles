@@ -1,6 +1,6 @@
 <script>
   import { shuffle, keyUpdate } from './utils'
-  const srcOnError = '//www.jeuweb.org/jscripts/jeuweb/no-game-image.png'
+  const srcOnError = '//jeuweb.org/jscripts/jeuweb/no-game-image.png'
   export let tileset = []
   let shuffled = tileset.slice()
   shuffle(shuffled)
