@@ -3,8 +3,8 @@ import fetch from '@typicode/pegasus'
 const url = 'https://www.jeuweb.org/our-games.json'
 
 function shrinkGame(game) {
-  const { name, url, image, description } = game
-  return { name, url, image, description }
+  const { name, url, image, description, id } = game
+  return { name, url, image, description, id, fit: "cover" }
 }
 
 function thransformData({data}) {
