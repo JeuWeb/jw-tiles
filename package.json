@@ -17,6 +17,7 @@
     "svelte": "^3.0.0"
   },
   "dependencies": {
+    "@typicode/pegasus": "^0.3.5",
     "sirv-cli": "^0.4.4"
   }
 }
