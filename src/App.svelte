@@ -20,11 +20,11 @@
 
 <div class="jw-tiles-inner">
 	<div class="jw-tiles-tileset">
-	{#each selectedTiles as tile}
-		<div class="jw-tiles-tile">
+	{#each selectedTiles as tile (tile.url)}
+		<a class="jw-tiles-tile" href="{tile.url}">
 	        <img src="{tile.image}" alt="{tile.name}" />
 	        <div>{tile.name}</div>
-	      </div>
+		</a>
 	{/each}
 	</div>
 	<div class="jw-tiles-arrow jw-tiles-arrow-left" on:click={goLeft}><span>◀</span></div>
@@ -40,19 +40,21 @@
 		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 	}
 	.jw-tiles-tileset {
+		min-height: 13em;
+		max-height: 18em;
 		display: flex;
 		justify-content: space-between;
-		align-items: end;
-		height: 18em;
+		align-items: stretch;
 	}
 	img {
 		display: block;
 		width: 100%;
-		max-height: 13em;
+		height: calc(100% - 30px);
 		object-fit: cover;
 	}
 	.jw-tiles-tile {
 		width: calc(25% - 9px);
+		text-decoration: none;
 	}
 	.jw-tiles-tile div {
 		height: 30px;
@@ -63,7 +65,6 @@
 		font-size: 14px;
 		line-height: calc(2 * 14px);
 		text-align: right;
-		margin-top: -3px;
 	}
 	.jw-tiles-arrow {
 		border-radius: 50%;

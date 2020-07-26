@@ -3,7 +3,7 @@ import fetch from '@typicode/pegasus'
 const url = 'https://raw.githubusercontent.com/RomainMazB/Annuaire_JeuWebOrg/master/inscrits.json'
 
 function shrinkGame(game) {
-  const { name, url, image, description } = game
+  let { name, url, image, description } = game
   return { name, url, image, description }
 }
 
