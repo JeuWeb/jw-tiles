@@ -74,7 +74,6 @@
   .jw-tiles-tile {
     width: calc(25% - 9px);
     text-decoration: none;
-    background: rgb(209, 209, 209);
   }
   .jw-tiles-ratio {
     position: relative;
@@ -130,18 +129,6 @@
   }
   .jw-tiles-arrow-right span {
     margin-left: 4px;
-  }
-  .jw-tiles-tile:first-child div {
-    border-radius: 0 0 0 8px;
-  }
-  .jw-tiles-tile:first-child img {
-    border-radius: 8px 0 0 0;
-  }
-  .jw-tiles-tile:last-child > div {
-    border-radius: 0 0 8px 0;
-  }
-  .jw-tiles-tile:last-child img {
-    border-radius: 0 8px 0 0;
   }
 
   .jw-tiles-hidden {
