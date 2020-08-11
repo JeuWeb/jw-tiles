@@ -2,13 +2,12 @@ import fetch from '@typicode/pegasus'
 
 const url = '//jeuweb.org/our-games.json'
 
-function shrinkGame(game) {
-  const { name, url, image, description, id } = game
-  return { name, url, image, description, id, fit: "cover" }
+function enhanceGame(game) {
+  return { ...game, fit: 'cover' }
 }
 
 function thransformData({data}) {
-  return data.map(shrinkGame)
+  return data.map(enhanceGame)
 }
 
 export default function load(fn) { 
