@@ -34,12 +34,27 @@
     }
   }
 
+  let touchStartX
+
+  function handleTouchStart(evt) {
+    touchStartX = evt.touches[0].pageX
+  }
+
+  function handleTouchEnd(evt, tid) {
+    let touchEndX = evt.changedTouches[0].pageX
+    if (Math.abs(touchEndX - touchStartX) < 20) setHovered(tid)
+    else {
+      setHovered(null)
+      if (touchEndX > touchStartX) goLeft()
+      else goRight()
+    }
+  }
+
   function topicUrl(tid) {
     return `//jeuweb.org/showthread.php?tid=${tid}`
   }
 </script>
 
-<p>{hovered}</p>
 <div class="jw-tiles-inner">
   <div class="jw-tiles-tileset">
     {#each selectedTiles as tile (tile.id)}
@@ -47,6 +62,8 @@
         class="jw-tiles-tile"
         class:jw-tiles-active={hovered === tile.id}
         on:mouseenter={() => setHovered(tile.id)}
+        on:touchstart={handleTouchStart}
+        on:touchend={evt => handleTouchEnd(evt, tile.id)}
         on:mouseleave={() => setHovered(null)}>
         <div class="jw-tiles-ratio">
           <img
@@ -54,7 +71,7 @@
             alt={tile.name}
             on:error={error => handleImageError(error, tile)}
             style="object-fit: {tile.fit}" />
-          {#if hovered === tile.id || true}
+          {#if hovered === tile.id}
             <div class="jw-tiles-infopane" transition:fade={{ duration: 200 }}>
               <div class="jw-tiles-game-descr">
                 <p>{tile.description}</p>
@@ -137,6 +154,10 @@
     max-height: 70%;
     overflow: hidden;
   }
+  .jw-tiles-game-descr p {
+    margin: 0;
+    padding: 0;
+  }
   .jw-tiles-game-actions {
     display: flex;
     justify-content: space-between;
@@ -160,6 +181,7 @@
     padding: 0 8px;
     width: 100%;
     font-size: 14px;
+    overflow: hidden;
     line-height: calc(2 * 14px);
     text-align: right;
   }
