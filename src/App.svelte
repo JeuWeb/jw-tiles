@@ -77,7 +77,7 @@
                 <p>{tile.description}</p>
               </div>
               <div class="jw-tiles-game-actions">
-                <a target="_blank" rel="noopener" href={topicUrl(tile.id_thread)}>Topic</a>
+                <a href={topicUrl(tile.id_thread)}>Topic</a>
                 <a target="_blank" rel="noopener" href={tile.url}>▶ Jouer</a>
               </div>
             </div>
